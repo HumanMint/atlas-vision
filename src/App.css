@@ -1,38 +1,73 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+:root {
+  --primary-font: 'Century Gothic', 'AppleGothic', 'CenturyGothic', sans-serif;
+  --secondary-font: 'Inter', sans-serif;
+  --atlas-gold: #ffcc00;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  margin: 0;
+  font-family: var(--secondary-font);
+  background-color: #000;
+  color: #fff;
+  overflow-x: hidden;
 }
 
-.App-header {
-  background-color: #282c34;
+.standalone-tool {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.standalone-header {
+  height: 60px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border-bottom: 1px solid #111;
+  background: rgba(0,0,0,0.9);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.App-link {
-  color: #61dafb;
+.brand-logo {
+  font-family: var(--primary-font);
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--atlas-gold);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+main {
+  flex: 1;
+  padding: 40px 0;
+}
+
+.standalone-footer {
+  padding: 40px 20px;
+  text-align: center;
+  border-top: 1px solid #111;
+  background: #050505;
+}
+
+.standalone-footer p {
+  font-size: 0.7rem;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--primary-font);
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }

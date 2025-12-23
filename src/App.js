@@ -1,23 +1,21 @@
-import logo from './logo.svg';
+import React from 'react';
+import SensorComparisonTool from './components/SensorComparisonTool';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="App standalone-tool">
+      <header className="standalone-header">
+        <div className="brand-logo">Atlas Lens Co.</div>
       </header>
+      
+      <main>
+        <SensorComparisonTool />
+      </main>
+
+      <footer className="standalone-footer">
+        <p>&copy; {new Date().getFullYear()} Atlas Lens Co. Technical specifications for internal visualization only.</p>
+      </footer>
     </div>
   );
 }
