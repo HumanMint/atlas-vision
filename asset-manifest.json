@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/atlas-vision/static/css/main.0c895ad7.css",
-    "main.js": "/atlas-vision/static/js/main.0e173eb7.js",
+    "main.css": "/atlas-vision/static/css/main.c52bf0d0.css",
+    "main.js": "/atlas-vision/static/js/main.1069b7f1.js",
     "static/js/977.8e7f474d.chunk.js": "/atlas-vision/static/js/977.8e7f474d.chunk.js",
     "static/js/455.c07f7116.chunk.js": "/atlas-vision/static/js/455.c07f7116.chunk.js",
     "index.html": "/atlas-vision/index.html",
-    "main.0c895ad7.css.map": "/atlas-vision/static/css/main.0c895ad7.css.map",
-    "main.0e173eb7.js.map": "/atlas-vision/static/js/main.0e173eb7.js.map",
+    "main.c52bf0d0.css.map": "/atlas-vision/static/css/main.c52bf0d0.css.map",
+    "main.1069b7f1.js.map": "/atlas-vision/static/js/main.1069b7f1.js.map",
     "977.8e7f474d.chunk.js.map": "/atlas-vision/static/js/977.8e7f474d.chunk.js.map",
     "455.c07f7116.chunk.js.map": "/atlas-vision/static/js/455.c07f7116.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0c895ad7.css",
-    "static/js/main.0e173eb7.js"
+    "static/css/main.c52bf0d0.css",
+    "static/js/main.1069b7f1.js"
   ]
 }
