@@ -1,34 +1,40 @@
 Brand,Model,Mode,Width,Height,Resolution,NativeAnamorphic,SupportedSqueezes
-ARRI,ALEXA 35,4.6K 3:2 Open Gate,27.99,19.22,4608 x 3164,True,"1.33;1.5;1.8;2.0"
-ARRI,ALEXA 35,3.3K 6:5,20.22,16.95,3328 x 2790,True,"2.0"
-ARRI,ALEXA 35,4K 16:9,24.12,13.57,3840 x 2160,False,""
-ARRI,ALEXA Mini LF,4.5K Open Gate,36.70,25.54,4448 x 3096,True,"1.33;1.5;1.8;2.0"
-ARRI,ALEXA Mini LF,2.8K 6:5,22.48,18.73,2816 x 2344,True,"2.0"
-ARRI,ALEXA Mini,2.8K 4:3,19.2,14.4,2880 x 2160,True,"2.0"
-ARRI,ALEXA Mini,3.2K 16:9,23.76,13.37,3200 x 1800,False,""
-ARRI,ALEXA 65,6.5K Open Gate,54.12,25.58,6560 x 3100,True,"1.25;1.3;1.5"
-Sony,Venice 2 (8K),8.6K 3:2 Open Gate,35.9,24.0,8640 x 5760,True,"1.3;1.5;1.8;2.0"
-Sony,Venice 2 (8K),5.8K 6:5,24.3,20.4,5792 x 4854,True,"2.0"
-Sony,Venice 2 (8K),8.2K 17:9,34.1,18.0,8192 x 4320,False,""
-Sony,Burano,8.6K 16:9 Full Frame,35.9,20.2,8632 x 4856,True,"1.3;1.5"
-Sony,Burano,5.8K 17:9 S35,24.0,12.6,5760 x 3036,True,"1.3;1.5"
-RED,V-RAPTOR 8K VV,8K 17:9,40.96,21.60,8192 x 4320,True,"1.25;1.3;1.5"
-RED,V-RAPTOR 8K VV,8K 16:9,38.4,21.6,7680 x 4320,True,"1.25;1.3;1.5"
-RED,V-RAPTOR 8K VV,7K 6:5,25.6,21.3,5120 x 4266,True,"2.0"
-RED,V-RAPTOR [X] 8K VV,8K 17:9,40.96,21.60,8192 x 4320,True,"1.25;1.3;1.5;1.65;1.8;2.0"
-RED,Komodo-X,6K 17:9,27.03,14.26,6144 x 3240,True,"1.3;1.5"
-RED,Komodo-X,4K 6:5,18.02,15.01,4096 x 3412,True,"2.0"
-Blackmagic,URSA Cine 12K LF,12K 3:2 Open Gate,35.64,23.32,12288 x 8040,True,"1.3;1.5;1.6;1.66;1.8;2.0"
-Blackmagic,URSA Cine 12K LF,12K 17:9,35.64,18.80,12288 x 6480,True,"1.3;1.5;1.6;1.66;1.8;2.0"
-Blackmagic,URSA Mini Pro 12K,12K 17:9,27.03,14.25,12288 x 6480,False,""
-Blackmagic,URSA Mini Pro 12K,8K 6:5,18.02,15.02,8192 x 6826,False,""
-Blackmagic,Cinema Camera 6K,6K Full Frame,36.0,24.0,6048 x 4032,False,""
-Panasonic,LUMIX GH6,5.7K 17:9,17.3,13.0,5728 x 3024,True,"1.3;1.5;1.8;2.0"
-Panasonic,LUMIX GH6,4.4K 4:3,17.3,13.0,4352 x 3264,True,"2.0"
-Canon,EOS C400,6K 17:9 Full Frame,36.0,19.0,6000 x 3164,True,"1.3;1.8;2.0"
-Canon,EOS C400,Super 35mm (Crop),26.2,13.8,4096 x 2160,False,""
-Canon,EOS C50,7K Full Frame,35.9,23.9,6960 x 4640,True,"1.3;1.8;2.0"
-Fujifilm,GFX 100II,8K 16:9,43.8,24.6,8192 x 4608,True,"1.33;1.5;1.8;2.0"
-Fujifilm,GFX Eterna 55,GFX Full Sensor,43.8,32.9,10240 x 7680,True,"1.33;1.5;1.8;2.0"
-Fujifilm,GFX Eterna 55,6K 17:9,36.0,19.0,6000 x 3164,True,"1.33;1.5"
-Fujifilm,X-H2S,6.2K 3:2 Open Gate,23.5,15.6,6240 x 4160,True,""
+ARRI,ALEXA 35 (Xtreme),4.6K 3:2 Open Gate,27.99,19.22,4608 x 3164,True,1.25;1.3;1.33;1.5;1.65;1.8;1.85;2.0
+ARRI,ALEXA 35 (Xtreme),4.6K 16:9,27.99,15.75,4608 x 2592,True,1.25;1.3;1.33;1.5;1.65;1.8;1.85;2.0
+ARRI,ALEXA 35 (Xtreme),4K 16:9,24.88,14.00,4096 x 2304,False,
+ARRI,ALEXA 35 (Xtreme),4K 2:1,24.88,12.44,4096 x 2048,False,
+ARRI,ALEXA 35 (Xtreme),3.8K 16:9,23.33,13.12,3840 x 2160,False,
+ARRI,ALEXA 35 (Xtreme),3.3K 6:5,20.22,16.95,3328 x 2790,True,1.25;1.3;1.33;1.5;1.65;1.8;1.85;2.0
+ARRI,ALEXA 35 (Xtreme),3K 1:1,18.70,18.70,3072 x 3072,True,1.25;1.3;1.33;1.5;1.65;1.8;1.85;2.0
+ARRI,ALEXA 35 (Xtreme),2.7K 8:9,16.70,18.70,2743 x 3086,True,2.0
+ARRI,ALEXA 35 (Xtreme),2K 16:9 S16,12.44,7.00,2048 x 1152,False,
+ARRI,ALEXA LF (Mini LF),4.5K Open Gate,36.70,25.54,4448 x 3096,True,1.33;1.5;1.8;2.0
+ARRI,ALEXA LF (Mini LF),2.8K 6:5,22.48,18.73,2816 x 2344,True,2.0
+ARRI,ALEXA Mini,2.8K 4:3,19.2,14.4,2880 x 2160,True,2.0
+ARRI,ALEXA Mini,3.2K 16:9,23.76,13.37,3200 x 1800,False,
+ARRI,ALEXA 65,6.5K Open Gate,54.12,25.58,6560 x 3100,True,1.25;1.3;1.5
+Sony,Venice 2 (8K),8.6K 3:2 Open Gate,35.9,24.0,8640 x 5760,True,1.3;1.5;1.8;2.0
+Sony,Venice 2 (8K),5.8K 6:5,24.3,20.4,5792 x 4854,True,2.0
+Sony,Venice 2 (8K),8.2K 17:9,34.1,18.0,8192 x 4320,False,
+Sony,Burano,8.6K 16:9 Full Frame,35.9,20.2,8632 x 4856,True,1.3;1.5
+Sony,Burano,5.8K 17:9 S35,24.0,12.6,5760 x 3036,True,1.3;1.5
+RED,V-RAPTOR 8K VV,8K 17:9,40.96,21.60,8192 x 4320,True,1.25;1.3;1.5
+RED,V-RAPTOR 8K VV,8K 16:9,38.4,21.6,7680 x 4320,True,1.25;1.3;1.5
+RED,V-RAPTOR 8K VV,7K 6:5,25.6,21.3,5120 x 4266,True,2.0
+RED,V-RAPTOR [X] 8K VV,8K 17:9,40.96,21.60,8192 x 4320,True,1.25;1.3;1.5;1.65;1.8;2.0
+RED,Komodo-X,6K 17:9,27.03,14.26,6144 x 3240,True,1.3;1.5
+RED,Komodo-X,4K 6:5,18.02,15.01,4096 x 3412,True,2.0
+Blackmagic,URSA Cine 12K LF,12K 3:2 Open Gate,35.64,23.32,12288 x 8040,True,1.3;1.5;1.6;1.66;1.8;2.0
+Blackmagic,URSA Cine 12K LF,12K 17:9,35.64,18.80,12288 x 6480,True,1.3;1.5;1.6;1.66;1.8;2.0
+Blackmagic,URSA Mini Pro 12K,12K 17:9,27.03,14.25,12288 x 6480,False,
+Blackmagic,URSA Mini Pro 12K,8K 6:5,18.02,15.02,8192 x 6826,False,
+Blackmagic,Cinema Camera 6K,6K Full Frame,36.0,24.0,6048 x 4032,False,
+Panasonic,LUMIX GH6,5.7K 17:9,17.3,13.0,5728 x 3024,True,1.3;1.5;1.8;2.0
+Panasonic,LUMIX GH6,4.4K 4:3,17.3,13.0,4352 x 3264,True,2.0
+Canon,EOS C400,6K 17:9 Full Frame,36.0,19.0,6000 x 3164,True,1.3;1.8;2.0
+Canon,EOS C400,Super 35mm (Crop),26.2,13.8,4096 x 2160,False,
+Canon,EOS C50,7K Full Frame,35.9,23.9,6960 x 4640,True,1.3;1.8;2.0
+Fujifilm,GFX 100II,8K 16:9,43.8,24.6,8192 x 4608,True,1.33;1.5;1.8;2.0
+Fujifilm,GFX Eterna 55,GFX Full Sensor,43.8,32.9,10240 x 7680,True,1.33;1.5;1.8;2.0
+Fujifilm,GFX Eterna 55,6K 17:9,36.0,19.0,6000 x 3164,True,1.33;1.5
+Fujifilm,X-H2S,6.2K 3:2 Open Gate,23.5,15.6,6240 x 4160,True,
