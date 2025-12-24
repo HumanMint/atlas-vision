@@ -1,5 +1,5 @@
 :root {
-  --font-stack: 'Century Gothic', 'AppleGothic', 'CenturyGothic', sans-serif;
+  --font-stack: "Century Gothic Pro", "Century Gothic", Futura, "Avenir", "AppleGothic", sans-serif;
   --secondary-font: 'Inter', sans-serif;
   --bg-color: #000;
   --text-color: #fff;
