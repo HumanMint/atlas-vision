@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { loadCameraData, loadLensData } from '../utils/dataLoader';
+import { currentVersion } from '../utils/versionHistory';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 import './SensorComparisonTool.css';
@@ -178,14 +179,29 @@ const SensorComparisonTool = () => {
   const handleExport = async (format) => {
     if (!reportRef.current) return;
     
-    reportRef.current.classList.add('is-exporting');
+    // Create a clone to avoid UI flash
+    const element = reportRef.current;
+    const clone = element.cloneNode(true);
+    
+    // Create a container to hold the clone off-screen
+    const container = document.createElement('div');
+    container.style.position = 'fixed';
+    container.style.left = '-10000px';
+    container.style.top = '0';
+    container.style.width = '1400px'; // Ensure sufficient width
+    container.appendChild(clone);
+    document.body.appendChild(container);
+    
+    // Apply export styling to the clone
+    clone.classList.add('is-exporting');
     
     try {
-        const canvas = await html2canvas(reportRef.current, {
+        const canvas = await html2canvas(clone, {
             backgroundColor: '#000000',
             scale: 2,
             useCORS: true,
-            logging: false
+            logging: false,
+            windowWidth: 1400
         });
 
         const imgData = canvas.toDataURL('image/png');
@@ -209,7 +225,7 @@ const SensorComparisonTool = () => {
         console.error("Export failed:", err);
         alert("Failed to generate report. Please try again.");
     } finally {
-        reportRef.current.classList.remove('is-exporting');
+        document.body.removeChild(container);
     }
   };
 
@@ -330,7 +346,16 @@ const SensorComparisonTool = () => {
         </aside>
 
         <main className="tool-content" ref={reportRef}>
-          <div className="viz-row">
+          <div className="report-header">
+              <h2>Atlas Lens Co. | Vision Tool</h2>
+              <div className="report-meta">
+                <span><strong>Camera:</strong> {brand1} {model1} ({currentCam1.name})</span>
+                <span className="separator">•</span>
+                <span><strong>Lens:</strong> {currentSeries.name} {fl}mm ({squeeze}x)</span>
+              </div>
+          </div>
+          <div className="report-body">
+            <div className="viz-row">
              <div className="viz-box sensor-viz">
                 <div className="viz-header">
                     <span className="viz-tag">Format Comparison</span>
@@ -451,6 +476,11 @@ const SensorComparisonTool = () => {
                     )}
                 </div>
              </div>
+          </div>
+          </div>
+          <div className="report-footer">
+              <p>{window.location.host}{window.location.pathname}</p>
+              <p style={{ fontSize: '0.6rem', marginTop: '5px', color: '#666' }}>v{currentVersion}</p>
           </div>
         </main>
       </div>

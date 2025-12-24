@@ -70,7 +70,8 @@
 
 .share-trigger:hover {
     background: #1a1a1a;
-    border-color: var(--atlas-gold);
+    border-color: #fff; /* High contrast on hover */
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
 }
 
 .share-menu {
@@ -210,19 +211,73 @@
 
 .add-compare-btn:hover { color: var(--atlas-gold); border-color: var(--atlas-gold); }
 
+/* Report Export Styles */
+.report-header, .report-footer {
+    display: none;
+    text-align: center;
+    width: 100%;
+}
+
+.tool-content.is-exporting .report-header,
+.tool-content.is-exporting .report-footer {
+    display: block;
+    padding: 20px 0;
+}
+
+.tool-content.is-exporting .report-header h2 {
+    color: #fff;
+    margin-bottom: 5px;
+    font-size: 1.8rem;
+}
+
+.tool-content.is-exporting .report-header p {
+    color: #888;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.tool-content.is-exporting .report-footer p {
+    color: #444;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tool-content.is-exporting .report-body {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 0;
+}
+
 .tool-content.is-exporting {
-    padding: 60px !important;
+    padding: 40px !important;
     background: #000 !important;
     min-width: 1200px !important;
+    align-items: center;
 }
 
 .tool-content.is-exporting .viz-row {
     flex-direction: row !important;
     flex-wrap: nowrap !important;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: center;
+    gap: 40px;
 }
 
 .tool-content.is-exporting .viz-box {
     min-width: 550px !important;
+    border: 1px solid #222;
+    box-shadow: none;
+}
+
+.tool-content.is-exporting .animate-fade-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .anamorphic-status {
@@ -563,4 +618,26 @@
         justify-content: center;
         width: auto;
     }
+}
+
+/* Report Meta Styles */
+.report-meta {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    color: #888;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+.report-meta .separator {
+    color: #444;
+}
+
+.report-meta strong {
+    color: #aaa;
+    font-weight: normal;
+    margin-right: 5px;
 }
