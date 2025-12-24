@@ -8,7 +8,7 @@
 
 .tool-header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     position: relative;
     margin-bottom: 40px;
@@ -17,13 +17,17 @@
     width: 100%;
 }
 
+/* Creates a left-side spacer to balance the right-side actions for perfect centering */
+.tool-header::before {
+    content: '';
+    flex: 1;
+}
+
 .header-main {
-    position: absolute;
-    left: 0;
-    right: 0;
+    flex: 0 0 auto;
     text-align: center;
-    z-index: 1;
     margin-bottom: 0;
+    z-index: 1;
 }
 
 .tool-header h2 {
@@ -34,10 +38,12 @@
 }
 
 .header-actions {
-    position: relative;
-    z-index: 50;
+    flex: 1;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
+    z-index: 50;
+    position: relative; /* Just for z-index context */
 }
 
 .share-dropdown {
@@ -546,12 +552,15 @@
         justify-content: center;
         gap: 20px;
     }
+    .tool-header::before {
+        display: none;
+    }
     .header-main {
-        position: static;
-        margin-bottom: 0;
+        flex: auto;
     }
     .header-actions {
-        position: static;
+        flex: auto;
+        justify-content: center;
         width: auto;
     }
 }
