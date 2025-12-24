@@ -25,12 +25,19 @@ const parseCSV = (csvText) => {
 };
 
 export const loadCameraData = async () => {
-  const response = await fetch('data/cameras.csv');
+  const publicUrl = process.env.PUBLIC_URL || '';
+  const response = await fetch(`${publicUrl}/data/cameras.csv`);
   const text = await response.text();
+
+  if (text.trim().startsWith('<')) {
+    throw new Error('Fetched data appears to be HTML, not CSV. Check the file path.');
+  }
+
   const data = parseCSV(text);
   
   const brands = {};
   data.forEach(row => {
+    if (!row.Brand || !row.Model) return; // Skip invalid rows
     if (!brands[row.Brand]) brands[row.Brand] = {};
     if (!brands[row.Brand][row.Model]) brands[row.Brand][row.Model] = [];
     brands[row.Brand][row.Model].push({
@@ -46,13 +53,20 @@ export const loadCameraData = async () => {
 };
 
 export const loadLensData = async () => {
-  const response = await fetch('data/lenses.csv');
+  const publicUrl = process.env.PUBLIC_URL || '';
+  const response = await fetch(`${publicUrl}/data/lenses.csv`);
   const text = await response.text();
+
+  if (text.trim().startsWith('<')) {
+    throw new Error('Fetched data appears to be HTML, not CSV. Check the file path.');
+  }
+
   const data = parseCSV(text);
   
   // Group by Series -> Squeeze, FocalLengths (with their specific ImageCircles)
   const seriesMap = {};
   data.forEach(row => {
+    if (!row.Series) return; // Skip invalid rows
     if (!seriesMap[row.Series]) {
       seriesMap[row.Series] = {
         name: row.Series,

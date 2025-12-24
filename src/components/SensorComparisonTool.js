@@ -391,14 +391,14 @@ const SensorComparisonTool = () => {
                 <div className="viz-header">
                     <span className="viz-tag">Desqueezed Output Simulation</span>
                     <div className="fov-toggles">
-                        <label className={`toggle gold ${showCam1 ? 'active' : ''}`}>
+                        <label className={`toggle gold ${showCam1 ? 'active' : ''}`} title={model1}>
                             <input type="checkbox" checked={showCam1} onChange={() => setShowCam1(!showCam1)} />
-                            <span>Cam 1</span>
+                            <span className="toggle-text">{model1}</span>
                         </label>
                         {isComparing && (
-                            <label className={`toggle blue ${showCam2 ? 'active' : ''}`}>
+                            <label className={`toggle blue ${showCam2 ? 'active' : ''}`} title={model2}>
                                 <input type="checkbox" checked={showCam2} onChange={() => setShowCam2(!showCam2)} />
-                                <span>Cam 2</span>
+                                <span className="toggle-text">{model2}</span>
                             </label>
                         )}
                     </div>

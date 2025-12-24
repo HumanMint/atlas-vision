@@ -7,17 +7,22 @@
 }
 
 .tool-header {
-    position: relative;
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
-    text-align: center;
+    position: relative;
     margin-bottom: 40px;
     border-bottom: 1px solid #111;
     padding-bottom: 30px;
+    width: 100%;
 }
 
 .header-main {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 1;
     margin-bottom: 0;
 }
 
@@ -29,10 +34,8 @@
 }
 
 .header-actions {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
+    position: relative;
+    z-index: 50;
     display: flex;
     align-items: center;
 }
@@ -44,7 +47,7 @@
 
 .share-trigger {
     background: #111;
-    border: 1px solid #222;
+    border: 1px solid var(--atlas-gold);
     color: var(--atlas-gold);
     padding: 10px 20px;
     font-size: 0.75rem;
@@ -54,6 +57,9 @@
     transition: all 0.3s ease;
     font-family: var(--primary-font);
     border-radius: 2px;
+    display: inline-block;
+    visibility: visible;
+    opacity: 1;
 }
 
 .share-trigger:hover {
@@ -258,6 +264,16 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 30px;
+    align-items: flex-start;
+}
+
+.sensor-viz {
+    flex: 1;
+    max-width: 500px;
+}
+
+.fov-sim-viz {
+    flex: 1.5;
 }
 
 .viz-box {
@@ -266,11 +282,8 @@
     padding: 40px;
     position: relative;
     border-radius: 4px;
-    flex: 1;
-    min-width: 450px;
     display: flex;
     flex-direction: column;
-    min-height: 600px;
 }
 
 @media (max-width: 1300px) {
@@ -302,6 +315,7 @@
 .fov-toggles {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .fov-toggles .toggle {
@@ -313,9 +327,19 @@
     letter-spacing: 1px;
     color: #666;
     cursor: pointer;
-    padding: 4px 10px;
+    padding: 0 10px;
     border: 1px solid #222;
     transition: all 0.3s ease;
+    height: 28px;
+    max-width: 140px;
+    border-radius: 2px;
+}
+
+.toggle-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
 }
 
 .fov-toggles .toggle.active {
@@ -514,4 +538,20 @@
 
 @media (max-width: 1000px) {
     .tool-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .tool-header {
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+    }
+    .header-main {
+        position: static;
+        margin-bottom: 0;
+    }
+    .header-actions {
+        position: static;
+        width: auto;
+    }
 }
