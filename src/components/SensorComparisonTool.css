@@ -7,10 +7,18 @@
 }
 
 .tool-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     margin-bottom: 40px;
     border-bottom: 1px solid #111;
     padding-bottom: 30px;
+}
+
+.header-main {
+    margin-bottom: 0;
 }
 
 .tool-header h2 {
@@ -18,6 +26,77 @@
     color: var(--atlas-gold);
     letter-spacing: 4px;
     margin-bottom: 10px;
+}
+
+.header-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.share-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.share-trigger {
+    background: #111;
+    border: 1px solid #222;
+    color: var(--atlas-gold);
+    padding: 10px 20px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--primary-font);
+    border-radius: 2px;
+}
+
+.share-trigger:hover {
+    background: #1a1a1a;
+    border-color: var(--atlas-gold);
+}
+
+.share-menu {
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 0;
+    background: #0d0d0d;
+    border: 1px solid #222;
+    border-radius: 4px;
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    min-width: 200px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.9);
+    padding: 5px 0;
+}
+
+.share-dropdown.is-open .share-menu {
+    display: flex;
+}
+
+.share-item {
+    background: none;
+    border: none;
+    color: #aaa;
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--primary-font);
+}
+
+.share-item:hover {
+    background: #1a1a1a;
+    color: var(--atlas-gold);
 }
 
 .description {
@@ -91,8 +170,9 @@
 .control-group label {
     font-family: var(--primary-font);
     font-size: 0.6rem;
-    color: #333;
+    color: #666;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .control-group select {
@@ -117,41 +197,6 @@
 }
 
 .add-compare-btn:hover { color: var(--atlas-gold); border-color: var(--atlas-gold); }
-
-.export-btns {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.export-btn {
-    background: #111;
-    border: 1px solid #222;
-    color: #fff;
-    padding: 10px;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: var(--primary-font);
-}
-
-.export-btn:hover {
-    border-color: var(--atlas-gold);
-    color: var(--atlas-gold);
-}
-
-.export-btn.pdf {
-    background: var(--atlas-gold);
-    color: #000;
-    border-color: var(--atlas-gold);
-}
-
-.export-btn.pdf:hover {
-    background: #fff;
-    border-color: #fff;
-}
 
 .tool-content.is-exporting {
     padding: 60px !important;
@@ -237,9 +282,11 @@
 
 .viz-tag {
     font-family: var(--primary-font);
-    font-size: 0.65rem;
-    color: #333;
+    font-size: 0.75rem;
+    color: #888;
     text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
 }
 
 .viz-header {
@@ -248,6 +295,8 @@
     align-items: center;
     margin-bottom: 25px;
     height: 30px;
+    border-bottom: 1px solid #111;
+    padding-bottom: 10px;
 }
 
 .fov-toggles {
@@ -262,16 +311,16 @@
     font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #333;
+    color: #666;
     cursor: pointer;
     padding: 4px 10px;
-    border: 1px solid #111;
+    border: 1px solid #222;
     transition: all 0.3s ease;
 }
 
 .fov-toggles .toggle.active {
     color: #fff;
-    border-color: #333;
+    border-color: #444;
 }
 
 .fov-toggles .toggle.gold.active {
@@ -298,7 +347,7 @@
     border: 1px solid #111;
 }
 
-.sensor-rect {
+.sensor-rect, .image-circle {
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -384,6 +433,7 @@
     background: rgba(0, 0, 0, 0.75);
     z-index: 5;
     pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .crop-shading.gold-mask { background: rgba(255, 204, 0, 0.35); }
@@ -395,6 +445,7 @@
     box-sizing: border-box;
     display: flex;
     z-index: 6;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .delivery-outline.top-left { align-items: flex-start; justify-content: flex-start; }

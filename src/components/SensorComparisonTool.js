@@ -15,9 +15,11 @@ const aspectRatios = [
 
 const SensorComparisonTool = () => {
   const reportRef = useRef(null);
+  const dropdownRef = useRef(null);
   const [cameraData, setCameraData] = useState(null);
   const [lensData, setLensData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isShareOpen, setIsShareOpen] = useState(false);
 
   const [brand1, setBrand1] = useState('');
   const [model1, setModel1] = useState('');
@@ -34,6 +36,16 @@ const SensorComparisonTool = () => {
   const [seriesIdx, setSeriesIdx] = useState(0);
   const [lensIdx, setLensIdx] = useState(4); // Default 32mm
   const [deliveryRatio, setDeliveryRatio] = useState(2.39);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsShareOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const init = async () => {
@@ -130,25 +142,26 @@ const SensorComparisonTool = () => {
     const margin = (100 - activeSizePct) / 2;
     const isBlue = colorClass.includes('blue');
 
+    const shadingStyles = {
+        left: { width: isWiderThanDelivery ? `${margin}%` : '0%', height: '100%', left: 0, top: 0 },
+        right: { width: isWiderThanDelivery ? `${margin}%` : '0%', height: '100%', right: 0, top: 0 },
+        top: { height: isWiderThanDelivery ? '0%' : `${margin}%`, width: '100%', top: 0, left: 0 },
+        bottom: { height: isWiderThanDelivery ? '0%' : `${margin}%`, width: '100%', bottom: 0, left: 0 }
+    };
+
+    const outlineStyle = isWiderThanDelivery 
+        ? { width: `${activeSizePct}%`, height: '100%', left: `${margin}%`, top: 0 }
+        : { width: '100%', height: `${activeSizePct}%`, left: 0, top: `${margin}%` };
+
     return (
         <>
-            {isWiderThanDelivery ? (
-                <>
-                    <div className={`crop-shading left ${colorClass}`} style={{ width: `${margin}%`, height: '100%', left: 0 }}></div>
-                    <div className={`crop-shading right ${colorClass}`} style={{ width: `${margin}%`, height: '100%', right: 0 }}></div>
-                    <div className={`delivery-outline ${isBlue ? 'bottom-left' : 'top-left'}`} style={{ width: `${activeSizePct}%`, height: '100%', left: `${margin}%` }}>
-                        <span className={`crop-tag ${colorClass}`}>Delivery Area ({deliveryRatio}:1)</span>
-                    </div>
-                </>
-            ) : (
-                <>
-                    <div className={`crop-shading top ${colorClass}`} style={{ height: `${margin}%`, width: '100%', top: 0 }}></div>
-                    <div className={`crop-shading bottom ${colorClass}`} style={{ height: `${margin}%`, width: '100%', bottom: 0 }}></div>
-                    <div className={`delivery-outline ${isBlue ? 'bottom-left' : 'top-left'}`} style={{ height: `${activeSizePct}%`, width: '100%', top: `${margin}%` }}>
-                        <span className={`crop-tag ${colorClass}`}>Delivery Area ({deliveryRatio}:1)</span>
-                    </div>
-                </>
-            )}
+            <div className={`crop-shading left ${colorClass}`} style={shadingStyles.left}></div>
+            <div className={`crop-shading right ${colorClass}`} style={shadingStyles.right}></div>
+            <div className={`crop-shading top ${colorClass}`} style={shadingStyles.top}></div>
+            <div className={`crop-shading bottom ${colorClass}`} style={shadingStyles.bottom}></div>
+            <div className={`delivery-outline ${isBlue ? 'bottom-left' : 'top-left'}`} style={outlineStyle}>
+                <span className={`crop-tag ${colorClass}`}>Delivery Area ({deliveryRatio}:1)</span>
+            </div>
         </>
     );
   };
@@ -203,20 +216,28 @@ const SensorComparisonTool = () => {
   return (
     <div className="sensor-tool-container" id="comparison-tool">
       <div className="tool-header">
-        <h2>Atlas Lens Co. | Vision Tool</h2>
-        <p className="description">Advanced Format Comparison & Desqueezed Simulation</p>
+        <div className="header-main">
+            <h2>Atlas Lens Co. | Vision Tool</h2>
+            <p className="description">Advanced Format Comparison & Desqueezed Simulation</p>
+        </div>
+        <div className="header-actions">
+            <div className={`share-dropdown ${isShareOpen ? 'is-open' : ''}`} ref={dropdownRef}>
+                <button 
+                    className="share-trigger"
+                    onClick={() => setIsShareOpen(!isShareOpen)}
+                >
+                    Share Report
+                </button>
+                <div className="share-menu">
+                    <button className="share-item png" onClick={() => { handleExport('png'); setIsShareOpen(false); }}>Save PNG Image</button>
+                    <button className="share-item pdf" onClick={() => { handleExport('pdf'); setIsShareOpen(false); }}>Save PDF Report</button>
+                </div>
+            </div>
+        </div>
       </div>
 
       <div className="tool-layout">
         <aside className="tool-sidebar">
-          <div className="selection-card export-card">
-            <h3>Export Tool Report</h3>
-            <div className="export-btns">
-                <button className="export-btn png" onClick={() => handleExport('png')}>Save PNG Image</button>
-                <button className="export-btn pdf" onClick={() => handleExport('pdf')}>Save PDF Report</button>
-            </div>
-          </div>
-
           <div className="selection-card lens-selection">
             <h3>Lens & Delivery</h3>
             <div className="control-group">
@@ -317,7 +338,7 @@ const SensorComparisonTool = () => {
                 <div className="svg-container">
                     <svg viewBox="0 0 400 300" style={{ width: '100%', height: 'auto' }}>
                         <rect width="400" height="300" fill="#050505" />
-                        <circle cx="200" cy="150" r={(imageCircle * scale) / 2} fill="rgba(255,204,0,0.02)" stroke="#333" strokeWidth="1" />
+                        <circle className="image-circle" cx="200" cy="150" r={(imageCircle * scale) / 2} fill="rgba(255,204,0,0.02)" stroke="#333" strokeWidth="1" />
                         <text x="200" y={150 - (imageCircle * scale) / 2 - 10} textAnchor="middle" fill="#555" fontSize="9" className="svg-label">
                             {currentSeries.name} {fl}mm Image Circle ({imageCircle}mm)
                         </text>
