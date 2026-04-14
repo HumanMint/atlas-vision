@@ -20,6 +20,8 @@ const SensorComparisonTool = () => {
   const [cameraData, setCameraData] = useState(null);
   const [lensData, setLensData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(null);
+  const [exportError, setExportError] = useState(null);
   const [isShareOpen, setIsShareOpen] = useState(false);
 
   const [brand1, setBrand1] = useState('');
@@ -49,21 +51,33 @@ const SensorComparisonTool = () => {
   }, []);
 
   useEffect(() => {
+    let cancelled = false;
     const init = async () => {
-      const cams = await loadCameraData();
-      const lenses = await loadLensData();
-      setCameraData(cams);
-      setLensData(lenses);
-      
-      const brands = Object.keys(cams);
-      setBrand1(brands[0]);
-      setModel1(Object.keys(cams[brands[0]])[0]);
-      setBrand2(brands[1] || brands[0]);
-      setModel2(Object.keys(cams[brands[1] || brands[0]])[0]);
-      
-      setLoading(false);
+      try {
+        const [cams, lenses] = await Promise.all([loadCameraData(), loadLensData()]);
+        if (cancelled) return;
+
+        const brands = Object.keys(cams);
+        if (brands.length === 0) {
+          throw new Error('No camera brands found in data file.');
+        }
+
+        setCameraData(cams);
+        setLensData(lenses);
+        setBrand1(brands[0]);
+        setModel1(Object.keys(cams[brands[0]])[0]);
+        setBrand2(brands[1] || brands[0]);
+        setModel2(Object.keys(cams[brands[1] || brands[0]])[0]);
+        setLoading(false);
+      } catch (err) {
+        if (cancelled) return;
+        console.error('Atlas Vision data load failed:', err);
+        setLoadError(err.message || 'Failed to load camera and lens data.');
+        setLoading(false);
+      }
     };
     init();
+    return () => { cancelled = true; };
   }, []);
 
   const parseRes = (resStr) => {
@@ -91,6 +105,13 @@ const SensorComparisonTool = () => {
   const imageCircle = currentLens?.ic || 31;
 
   if (loading) return <div className="loading">Loading Atlas Vision Data...</div>;
+  if (loadError) return (
+    <div className="loading load-error" role="alert">
+      <strong>Could not load data.</strong>
+      <span>{loadError}</span>
+      <span className="hint">Try refreshing. If the problem persists, the data file may be missing from the deployment.</span>
+    </div>
+  );
 
   const brands = Object.keys(cameraData);
   
@@ -174,7 +195,7 @@ const SensorComparisonTool = () => {
   const diag1 = Math.sqrt(Math.pow(currentCam1.width, 2) + Math.pow(currentCam1.height, 2));
   const diag2 = currentCam2 ? Math.sqrt(Math.pow(currentCam2.width, 2) + Math.pow(currentCam2.height, 2)) : 0;
 
-  const sampleImg = "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&q=80&w=1200";
+  const sampleImg = `${process.env.PUBLIC_URL || ''}/img/sample-bg.jpg`;
 
   const handleExport = async (format) => {
     if (!reportRef.current) return;
@@ -223,7 +244,8 @@ const SensorComparisonTool = () => {
         }
     } catch (err) {
         console.error("Export failed:", err);
-        alert("Failed to generate report. Please try again.");
+        setExportError('Failed to generate report. Please try again.');
+        setTimeout(() => setExportError(null), 5000);
     } finally {
         document.body.removeChild(container);
     }
@@ -231,6 +253,9 @@ const SensorComparisonTool = () => {
 
   return (
     <div className="sensor-tool-container" id="comparison-tool">
+      {exportError && (
+        <div className="export-toast" role="alert">{exportError}</div>
+      )}
       <div className="tool-header">
         <div className="header-main">
             <h2>Atlas Lens Co. | Vision Tool</h2>

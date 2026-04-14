@@ -24,17 +24,28 @@ const parseCSV = (csvText) => {
   });
 };
 
+const fetchCsv = async (path, label) => {
+  let response;
+  try {
+    response = await fetch(path);
+  } catch (networkErr) {
+    throw new Error(`Could not reach ${label} data file (network error).`);
+  }
+  if (!response.ok) {
+    throw new Error(`Failed to load ${label} data (HTTP ${response.status}).`);
+  }
+  const text = await response.text();
+  if (text.trim().startsWith('<')) {
+    throw new Error(`${label} data file is HTML, not CSV — check the deployment path.`);
+  }
+  return text;
+};
+
 export const loadCameraData = async () => {
   const publicUrl = process.env.PUBLIC_URL || '';
-  const response = await fetch(`${publicUrl}/data/cameras.csv`);
-  const text = await response.text();
-
-  if (text.trim().startsWith('<')) {
-    throw new Error('Fetched data appears to be HTML, not CSV. Check the file path.');
-  }
-
+  const text = await fetchCsv(`${publicUrl}/data/cameras.csv`, 'camera');
   const data = parseCSV(text);
-  
+
   const brands = {};
   data.forEach(row => {
     if (!row.Brand || !row.Model) return; // Skip invalid rows
@@ -49,18 +60,16 @@ export const loadCameraData = async () => {
       supportedSqueezes: row.SupportedSqueezes ? row.SupportedSqueezes.split(';').map(s => parseFloat(s)) : []
     });
   });
+
+  if (Object.keys(brands).length === 0) {
+    throw new Error('Camera data file loaded but no valid rows were found.');
+  }
   return brands;
 };
 
 export const loadLensData = async () => {
   const publicUrl = process.env.PUBLIC_URL || '';
-  const response = await fetch(`${publicUrl}/data/lenses.csv`);
-  const text = await response.text();
-
-  if (text.trim().startsWith('<')) {
-    throw new Error('Fetched data appears to be HTML, not CSV. Check the file path.');
-  }
-
+  const text = await fetchCsv(`${publicUrl}/data/lenses.csv`, 'lens');
   const data = parseCSV(text);
   
   // Group by Series -> Squeeze, FocalLengths (with their specific ImageCircles)
@@ -75,10 +84,14 @@ export const loadLensData = async () => {
       };
     }
     seriesMap[row.Series].lenses.push({
-      fl: parseInt(row.FocalLength),
+      fl: parseInt(row.FocalLength, 10),
       ic: parseFloat(row.ImageCircle)
     });
   });
-  
-  return Object.values(seriesMap);
+
+  const series = Object.values(seriesMap);
+  if (series.length === 0) {
+    throw new Error('Lens data file loaded but no valid rows were found.');
+  }
+  return series;
 };

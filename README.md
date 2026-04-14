@@ -61,4 +61,6 @@ Builds the project and deploys it to GitHub Pages.
 
 ## License
 
-Internal Tool - Atlas Lens Co. Technical specifications for visualization only.
+© Atlas Lens Co. All rights reserved.
+
+This tool is published as a public cinematography reference. The camera and lens data shown are for visualization purposes only — always verify specs against the manufacturer's official documentation before making production decisions.

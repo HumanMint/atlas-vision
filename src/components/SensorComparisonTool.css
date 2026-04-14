@@ -641,3 +641,78 @@
     font-weight: normal;
     margin-right: 5px;
 }
+
+/* Loading & error states */
+.loading {
+    padding: 120px 20px;
+    text-align: center;
+    color: #555;
+    font-family: var(--primary-font);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.loading.load-error {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: #ff6666;
+}
+
+.loading.load-error strong {
+    color: #ff8888;
+    font-size: 1rem;
+    letter-spacing: 4px;
+    font-weight: normal;
+}
+
+.loading.load-error .hint {
+    color: #555;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: none;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+/* Export error toast */
+.export-toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #1a0606;
+    border: 1px solid #ff4444;
+    color: #ff8888;
+    padding: 14px 22px;
+    border-radius: 3px;
+    font-family: var(--primary-font);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    z-index: 3000;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.85);
+    animation: toastSlide 0.3s ease-out;
+    max-width: 320px;
+}
+
+@keyframes toastSlide {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .export-toast,
+    .animate-fade-in,
+    .sensor-rect,
+    .image-circle,
+    .fov-sim-master,
+    .fov-frame,
+    .crop-shading,
+    .delivery-outline {
+        animation: none !important;
+        transition: none !important;
+    }
+}
